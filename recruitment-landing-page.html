@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctanos - Agencia de Reclutamiento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+        }
+
+        h1 {
+            color: #1e3c72;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .tagline {
+            color: #2a5298;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: left 0.5s;
+        }
+
+        .contact-btn:hover::before {
+            left: 100%;
+        }
+
+        .whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .whatsapp:hover {
+            background: #20ba5a;
+        }
+
+        .telegram {
+            background: #0088cc;
+            color: white;
+        }
+
+        .telegram:hover {
+            background: #0077b3;
+        }
+
+        .icon {
+            margin-right: 12px;
+            font-size: 24px;
+        }
+
+        .divider {
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            position: relative;
+            color: #999;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .contact-form {
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        select {
+            cursor: pointer;
+            background: white;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 60, 114, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 60, 114, 0.5);
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .features {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .features h3 {
+            color: #1e3c72;
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li::before {
+            content: '✓';
+            color: #25D366;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .contact-btn {
+                font-size: 16px;
+                padding: 16px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">💼</div>
+        <h1>Tu Nombre de Agencia</h1>
+        <p class="subtitle">Conectamos talento con oportunidades</p>
+        <p class="tagline">¡Encuentra tu próximo empleo ideal!</p>
+
+        <div class="features">
+            <h3>¿Por qué elegirnos?</h3>
+            <ul>
+                <li>Respuesta rápida en menos de 24 horas</li>
+                <li>Asesoría personalizada y gratuita</li>
+                <li>Amplia red de empresas asociadas</li>
+                <li>Seguimiento durante todo el proceso</li>
+            </ul>
+        </div>
+
+        <div class="contact-buttons">
+            <!-- WhatsApp Button -->
+            <a href="https://wa.me/502123456789?text=Hola,%20estoy%20interesado%20en%20encontrar%20empleo" class="contact-btn whatsapp" target="_blank">
+                <span class="icon">📱</span>
+                Escríbenos por WhatsApp
+            </a>
+
+            <!-- Telegram Button -->
+            <a href="https://t.me/Trabajo168" class="contact-btn telegram" target="_blank">
+                <span class="icon">✈️</span>
+                Chatea por Telegram
+            </a>
+        </div>
+
+        <div class="divider">
+            <span>O COMPLETA EL FORMULARIO</span>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Nombre Completo *</label>
+                <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Número de Teléfono *</label>
+                <input type="tel" id="phone" name="phone" required placeholder="+502 12 345 678">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" placeholder="tu@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="job_type">Tipo de Empleo que Buscas *</label>
+                <select id="job_type" name="job_type" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="tiempo_completo">Tiempo Completo</option>
+                    <option value="medio_tiempo">Medio Tiempo</option>
+                    <option value="temporal">Temporal</option>
+                    <option value="freelance">Freelance</option>
+                    <option value="practicas">Prácticas</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Años de Experiencia</label>
+                <select id="experience" name="experience">
+                    <option value="">Selecciona una opción</option>
+                    <option value="sin_experiencia">Sin experiencia</option>
+                    <option value="1-2">1-2 años</option>
+                    <option value="3-5">3-5 años</option>
+                    <option value="5+">Más de 5 años</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Cuéntanos sobre tu perfil *</label>
+                <textarea id="message" name="message" required placeholder="Ej: Soy contador con 3 años de experiencia buscando empleo en el sector financiero..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Enviar Solicitud</button>
+        </form>
+
+        <div class="footer">
+            📞 Horario de atención: Lunes a Viernes, 8:00 AM - 6:00 PM<br>
+            Respuesta garantizada en 24 horas
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener datos del formulario
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const jobType = document.getElementById('job_type').value;
+            const experience = document.getElementById('experience').value;
+            const message = document.getElementById('message').value;
+            
+            // CAMBIAR ESTE NÚMERO A TU WHATSAPP
+            const whatsappNumber = '502123456789'; 
+            
+            // Crear mensaje para WhatsApp
+            const whatsappMessage = `🔍 *NUEVA SOLICITUD DE EMPLEO*\n\n` +
+                `👤 *Nombre:* ${name}\n` +
+                `📱 *Teléfono:* ${phone}\n` +
+                `📧 *Email:* ${email}\n` +
+                `💼 *Tipo de empleo:* ${jobType}\n` +
+                `⏰ *Experiencia:* ${experience}\n\n` +
+                `📝 *Perfil:*\n${message}`;
+            
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // Abrir WhatsApp
+            window.open(whatsappURL, '_blank');
+            
+            // Resetear formulario
+            this.reset();
+            
+            // Mostrar mensaje de éxito
+            alert('¡Gracias por tu interés! Te estamos redirigiendo a WhatsApp para completar tu solicitud...');
+        });
+    </script>
+</body>
+</html>
