@@ -253,7 +253,7 @@
 
         .features li::before {
             content: '✓';
-            color: #25D366;
+            color: #0088cc;
             font-weight: bold;
             font-size: 18px;
             margin-right: 10px;
@@ -379,28 +379,28 @@
             const experience = document.getElementById('experience').value;
             const message = document.getElementById('message').value;
             
-            // CAMBIAR ESTE NÚMERO A TU WHATSAPP
-            const whatsappNumber = '502123456789'; 
+            // CAMBIAR ESTE USUARIO A TU TELEGRAM
+            const telegramUsername = 'Trabajo168'; 
             
-            // Crear mensaje para WhatsApp
-            const whatsappMessage = `🔍 *NUEVA SOLICITUD DE EMPLEO*\n\n` +
-                `👤 *Nombre:* ${name}\n` +
-                `📱 *Teléfono:* ${phone}\n` +
-                `📧 *Email:* ${email}\n` +
-                `💼 *Tipo de empleo:* ${jobType}\n` +
-                `⏰ *Experiencia:* ${experience}\n\n` +
-                `📝 *Perfil:*\n${message}`;
+            // Crear mensaje para Telegram
+            const telegramMessage = `🔍 NUEVA SOLICITUD DE EMPLEO\n\n` +
+                `👤 Nombre: ${name}\n` +
+                `📱 Teléfono: ${phone}\n` +
+                `📧 Email: ${email}\n` +
+                `💼 Tipo de empleo: ${jobType}\n` +
+                `⏰ Experiencia: ${experience}\n\n` +
+                `📝 Perfil:\n${message}`;
             
-            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+            const telegramURL = `https://t.me/${telegramUsername}?text=${encodeURIComponent(telegramMessage)}`;
             
-            // Abrir WhatsApp
-            window.open(whatsappURL, '_blank');
+            // Abrir Telegram
+            window.open(telegramURL, '_blank');
             
             // Resetear formulario
             this.reset();
             
             // Mostrar mensaje de éxito
-            alert('¡Gracias por tu interés! Te estamos redirigiendo a WhatsApp para completar tu solicitud...');
+            alert('¡Gracias por tu interés! Te estamos redirigiendo a Telegram para completar tu solicitud...');
         });
     </script>
 </body>
