@@ -3,260 +3,703 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agencia Conecta Carreras - Servicios de Reclutamiento</title>
+    <title>Agencia Conecta Carreras - Encuentra Tu Trabajo Remoto Ideal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
-
-        .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 500px;
+        
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 40px 30px;
-            text-align: center;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
         }
-
-        .logo {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-30px) translateX(10px); }
+            50% { transform: translateY(-60px) translateX(-10px); }
+            75% { transform: translateY(-30px) translateX(10px); }
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Glassmorphism card */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Header section */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 50px;
-            color: white;
+            font-size: 40px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s infinite;
         }
-
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
         h1 {
-            color: #1e3c72;
+            color: #1a202c;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            color: #667eea;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            color: #4a5568;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Alert banner */
+        .alert-banner {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 18px 20px;
+            border-radius: 15px;
+            margin-bottom: 35px;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
+            animation: shake 0.5s ease-in-out 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .alert-icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+        
+        /* Job cards */
+        .jobs-section {
+            margin: 35px 0;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .job-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 15px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+        
+        .job-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .job-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .job-info {
+            flex: 1;
+        }
+        
+        .job-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 4px;
+        }
+        
+        .job-salary {
+            font-size: 16px;
+            font-weight: 700;
+            color: #48bb78;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .job-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        
+        .job-tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Benefits section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .benefit-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f6f8fb 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            border-color: #667eea;
+        }
+        
+        .benefit-icon {
             font-size: 32px;
             margin-bottom: 10px;
-            font-weight: 700;
+            display: block;
         }
-
-        .subtitle {
-            color: #666;
-            font-size: 18px;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        .tagline {
-            color: #2a5298;
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
-
-        .features {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .features h3 {
-            color: #1e3c72;
-            font-size: 18px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .features ul {
-            list-style: none;
-            padding: 0;
-            display: inline-block;
-            text-align: left;
-        }
-
-        .features li {
-            padding: 8px 0;
-            color: #555;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-        }
-
-        .features li::before {
-            content: '✓';
-            color: #0088cc;
-            font-weight: bold;
-            font-size: 18px;
-            margin-right: 10px;
-        }
-
-        .interest-box {
-            background: #e8f4f8;
-            border-left: 4px solid #0088cc;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-        }
-
-        .interest-text {
-            color: #1e3c72;
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .badges {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            background: white;
-            padding: 8px 16px;
-            border-radius: 20px;
+        
+        .benefit-text {
             font-size: 13px;
-            color: #555;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            font-weight: 500;
-        }
-
-        .telegram-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 18px 40px;
-            border-radius: 12px;
-            text-decoration: none;
             font-weight: 600;
-            font-size: 17px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            background: #0088cc;
+            color: #2d3748;
+            line-height: 1.4;
+        }
+        
+        /* CTA Button */
+        .cta-container {
+            margin: 40px 0 30px;
+        }
+        
+        .cta-button {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            margin-bottom: 30px;
+            text-align: center;
+            padding: 22px 30px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
             position: relative;
             overflow: hidden;
         }
-
-        .telegram-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(0,136,204,0.3);
-            background: #0077b3;
-        }
-
-        .telegram-btn::before {
+        
+        .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: rgba(255,255,255,0.2);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.5s;
         }
-
-        .telegram-btn:hover::before {
+        
+        .cta-button:hover::before {
             left: 100%;
         }
-
-        .icon {
-            margin-right: 12px;
-            font-size: 24px;
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.5);
         }
-
-        .footer {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            color: #999;
+        
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .button-icon {
+            font-size: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        /* Response time badge */
+        .response-badge {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.3);
+        }
+        
+        .response-icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+        
+        /* Process steps */
+        .process-section {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .process-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: start;
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .process-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
             font-size: 14px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-text {
+            font-size: 14px;
+            color: #2d3748;
+            line-height: 1.6;
+            padding-top: 5px;
+        }
+        
+        /* Trust signals */
+        .trust-section {
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .trust-item {
+            padding: 15px;
+        }
+        
+        .trust-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .trust-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: #667eea;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .trust-label {
+            font-size: 12px;
+            color: #718096;
+            font-weight: 600;
+        }
+        
+        /* Footer note */
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 15px;
+            font-size: 13px;
+            color: #4a5568;
             line-height: 1.6;
         }
-
-        .footer-icon {
-            margin-right: 5px;
+        
+        .footer-note strong {
+            color: #667eea;
         }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
+        
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            .card {
+                padding: 35px 25px;
+                border-radius: 25px;
             }
-
+            
             h1 {
                 font-size: 26px;
             }
-
-            .subtitle {
-                font-size: 16px;
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
             }
-
-            .telegram-btn {
-                font-size: 16px;
-                padding: 16px 30px;
+            
+            .trust-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
-
-            .badges {
-                gap: 8px;
+            
+            .cta-button {
+                font-size: 18px;
+                padding: 20px 25px;
             }
-
-            .badge {
-                font-size: 12px;
-                padding: 6px 12px;
+            
+            .job-card {
+                padding: 20px;
+            }
+            
+            .process-section {
+                padding: 25px 20px;
             }
         }
+        
+        /* Floating animation for benefits */
+        @keyframes floatBenefit {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .benefit-card:nth-child(1) { animation: floatBenefit 3s ease-in-out infinite; }
+        .benefit-card:nth-child(2) { animation: floatBenefit 3s ease-in-out infinite 0.5s; }
+        .benefit-card:nth-child(3) { animation: floatBenefit 3s ease-in-out infinite 1s; }
+        .benefit-card:nth-child(4) { animation: floatBenefit 3s ease-in-out infinite 1.5s; }
     </style>
 </head>
 <body>
+    <!-- Animated background particles -->
+    <div class="particles" id="particles"></div>
+
     <div class="container">
-        <div class="logo">💼</div>
-        <h1>Agencia Conecta Carreras</h1>
-        <p class="subtitle">Conectamos talento con oportunidades</p>
-        <p class="tagline">¡Encuentra tu próximo empleo ideal!</p>
+        <div class="card">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo-container">💼</div>
+                <h1>Agencia Conecta Carreras</h1>
+                <p class="subtitle">Tu Puerta al Trabajo Remoto</p>
+                <p class="tagline">Conectamos talento con oportunidades laborales remotas reales y verificadas</p>
+            </div>
 
-        <div class="features">
-            <h3>¿Por qué elegirnos?</h3>
-            <ul>
-                <li>Respuesta rápida</li>
-                <li>Asesoría personalizada y gratuita</li>
-                <li>Amplia red de empresas asociadas</li>
-                <li>Seguimiento durante todo el proceso</li>
-            </ul>
-        </div>
+            <!-- Alert Banner -->
+            <div class="alert-banner">
+                <span class="alert-icon">⚡</span>
+                <strong>¡CONTRATANDO ESTA SEMANA!</strong> Vacantes limitadas disponibles
+            </div>
 
-        <div class="interest-box">
-            <p class="interest-text">Si estás interesado, por favor contacta a nuestra recepcionista.</p>
-            <div class="badges">
-                <span class="badge">👤 Respuesta humana, no bot</span>
-                <span class="badge">✓ Seguro para chatear</span>
+            <!-- Jobs Section -->
+            <div class="jobs-section">
+                <h2 class="section-title">
+                    <span>📋</span> Posiciones Disponibles Ahora
+                </h2>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">💻</div>
+                        <div class="job-info">
+                            <div class="job-title">Trabajo Remoto</div>
+                            <div class="job-salary">💰 Q2,000 - Q5,000/mes</div>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-tag">🏠 Desde casa</span>
+                        <span class="job-tag">⏰ Flexible</span>
+                        <span class="job-tag">✅ Sin experiencia</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">👩‍💼</div>
+                        <div class="job-info">
+                            <div class="job-title">Asistente Virtual</div>
+                            <div class="job-salary">💰 Q2,500 - Q6,000/mes</div>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-tag">🏠 100% Remoto</span>
+                        <span class="job-tag">📚 Capacitación</span>
+                        <span class="job-tag">⭐ Tiempo parcial</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">📱</div>
+                        <div class="job-info">
+                            <div class="job-title">Asistente Remoto</div>
+                            <div class="job-salary">💰 Q2,200 - Q5,500/mes</div>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-tag">🎯 Inmediato</span>
+                        <span class="job-tag">💼 Profesional</span>
+                        <span class="job-tag">🚀 Crecimiento</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits Grid -->
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <span class="benefit-icon">⏰</span>
+                    <div class="benefit-text">Horarios 100% Flexibles</div>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">🎓</span>
+                    <div class="benefit-text">Capacitación Completa Incluida</div>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">🏠</span>
+                    <div class="benefit-text">Trabajo Desde Tu Casa</div>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-icon">💳</span>
+                    <div class="benefit-text">Pagos Seguros y Puntuales</div>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="cta-container">
+                <a href="https://t.me/luciainfocenter01s" class="cta-button" id="telegramButton">
+                    <span class="button-icon">📱</span>
+                    Aplicar Ahora en Telegram
+                </a>
+            </div>
+
+            <!-- Response Badge -->
+            <div class="response-badge">
+                <span class="response-icon">⚡</span>
+                Respuesta garantizada en menos de 30 minutos
+            </div>
+
+            <!-- Process Section -->
+            <div class="process-section">
+                <div class="process-title">🚀 ¿Cómo Funciona?</div>
+                
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">
+                        <strong>Haz clic en el botón verde de arriba</strong> y abre Telegram
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">
+                        <strong>Preséntate brevemente</strong> - nombre, edad y disponibilidad
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">
+                        <strong>Recibe las vacantes disponibles</strong> según tu perfil
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-text">
+                        <strong>¡Empieza a trabajar esta semana!</strong> Con soporte completo
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Signals -->
+            <div class="trust-section">
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <span class="trust-icon">👥</span>
+                        <span class="trust-number">150+</span>
+                        <div class="trust-label">Personas Colocadas</div>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">⭐</span>
+                        <span class="trust-number">4.8/5</span>
+                        <div class="trust-label">Calificación Promedio</div>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">✅</span>
+                        <span class="trust-number">100%</span>
+                        <div class="trust-label">Gratis y Verificado</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Note -->
+            <div class="footer-note">
+                <strong>🔒 100% Seguro y Gratuito</strong><br>
+                Nunca cobramos por registro o búsqueda de empleo. Somos una agencia de reclutamiento legítima comprometida con conectar talento guatemalteco con oportunidades reales.
             </div>
         </div>
-
-        <a href="https://t.me/luciainfocenter01s" class="telegram-btn" target="_blank">
-            <span class="icon">💬</span>
-            Contact Receptionist
-        </a>
-
-        <div class="footer">
-            <span class="footer-icon">📞</span> Horario de atención: Lunes a Viernes, 8:00 AM - 6:00 PM<br>
-            Respuesta garantizada en 24 horas
-        </div>
     </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 60 + 20;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+        
+        // Track button clicks
+        document.getElementById('telegramButton').addEventListener('click', function() {
+            console.log('Telegram button clicked - User redirected');
+            // Add your analytics tracking here
+            // Example: gtag('event', 'click', {'event_category': 'CTA', 'event_label': 'Telegram Button'});
+        });
+        
+        // Add hover effect to job cards
+        const jobCards = document.querySelectorAll('.job-card');
+        jobCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%)';
+            });
+        });
+    </script>
 </body>
 </html>
