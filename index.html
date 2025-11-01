@@ -660,6 +660,44 @@
     </div>
 
     <script>
+        // ==============================================
+        // TRACKING & ANALYTICS SYSTEM
+        // ==============================================
+        
+        // Track page load
+        const pageLoadTime = new Date().toISOString();
+        const visitData = {
+            timestamp: pageLoadTime,
+            userAgent: navigator.userAgent,
+            language: navigator.language,
+            screenSize: `${window.innerWidth}x${window.innerHeight}`,
+            referrer: document.referrer || 'Direct',
+            isMobile: /Mobile|Android|iPhone/i.test(navigator.userAgent)
+        };
+        
+        // Log page visit
+        console.log('📊 PAGE VISIT TRACKED:', visitData);
+        console.log('📱 Device Type:', visitData.isMobile ? 'MOBILE' : 'DESKTOP');
+        console.log('🔗 Came from:', visitData.referrer);
+        
+        // Track time on page
+        let timeOnPage = 0;
+        const timeTracker = setInterval(() => {
+            timeOnPage++;
+            if (timeOnPage === 10) {
+                console.log('⏱️ User spent 10 seconds on page');
+            }
+            if (timeOnPage === 30) {
+                console.log('⏱️ User spent 30 seconds on page - HIGH INTEREST!');
+            }
+        }, 1000);
+        
+        // Track when user leaves
+        window.addEventListener('beforeunload', function() {
+            console.log(`⏱️ Total time on page: ${timeOnPage} seconds`);
+            clearInterval(timeTracker);
+        });
+        
         // Create floating particles
         function createParticles() {
             const container = document.getElementById('particles');
@@ -683,23 +721,88 @@
         
         createParticles();
         
-        // Track button clicks
-        document.getElementById('telegramButton').addEventListener('click', function() {
-            console.log('Telegram button clicked - User redirected');
-            // Add your analytics tracking here
-            // Example: gtag('event', 'click', {'event_category': 'CTA', 'event_label': 'Telegram Button'});
+        // Track Telegram button clicks
+        document.getElementById('telegramButton').addEventListener('click', function(e) {
+            const clickData = {
+                timestamp: new Date().toISOString(),
+                timeOnPageBeforeClick: timeOnPage + ' seconds',
+                buttonText: this.innerText
+            };
+            
+            console.log('🎯 TELEGRAM BUTTON CLICKED!');
+            console.log('📊 Click Data:', clickData);
+            console.log('✅ User is being redirected to Telegram: @luciainfocenter01s');
+            
+            // Track to console for easy monitoring
+            console.log('═══════════════════════════════════');
+            console.log('🚀 CONVERSION EVENT!');
+            console.log('User clicked after ' + timeOnPage + ' seconds');
+            console.log('Device: ' + (visitData.isMobile ? 'Mobile' : 'Desktop'));
+            console.log('═══════════════════════════════════');
+            
+            // OPTIONAL: Add Google Analytics tracking here
+            // if (typeof gtag !== 'undefined') {
+            //     gtag('event', 'click', {
+            //         'event_category': 'CTA',
+            //         'event_label': 'Telegram Button',
+            //         'value': 1
+            //     });
+            // }
+            
+            // OPTIONAL: Add Facebook Pixel tracking here
+            // if (typeof fbq !== 'undefined') {
+            //     fbq('track', 'Lead');
+            // }
         });
         
-        // Add hover effect to job cards
+        // Track job card interactions
         const jobCards = document.querySelectorAll('.job-card');
-        jobCards.forEach(card => {
+        jobCards.forEach((card, index) => {
             card.addEventListener('mouseenter', function() {
                 this.style.background = 'linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%)';
+                console.log(`👆 User hovering on job card ${index + 1}`);
             });
             card.addEventListener('mouseleave', function() {
                 this.style.background = 'linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%)';
             });
+            card.addEventListener('click', function() {
+                console.log(`🔍 User clicked job card ${index + 1} - showing interest!`);
+            });
         });
+        
+        // Track scroll depth
+        let maxScroll = 0;
+        window.addEventListener('scroll', function() {
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            if (scrollPercent > maxScroll) {
+                maxScroll = Math.round(scrollPercent);
+                if (maxScroll >= 25 && maxScroll < 30) {
+                    console.log('📜 User scrolled 25% of page');
+                }
+                if (maxScroll >= 50 && maxScroll < 55) {
+                    console.log('📜 User scrolled 50% of page - reading content!');
+                }
+                if (maxScroll >= 75 && maxScroll < 80) {
+                    console.log('📜 User scrolled 75% of page - highly engaged!');
+                }
+                if (maxScroll >= 90) {
+                    console.log('📜 User scrolled to bottom - saw everything!');
+                }
+            }
+        });
+        
+        // Summary on page unload
+        window.addEventListener('beforeunload', function() {
+            console.log('📊 SESSION SUMMARY:');
+            console.log('Time on page:', timeOnPage, 'seconds');
+            console.log('Max scroll depth:', maxScroll + '%');
+            console.log('Device:', visitData.isMobile ? 'Mobile' : 'Desktop');
+        });
+        
+        // Log that tracking is active
+        console.log('✅ Tracking system active');
+        console.log('💡 Open browser console (F12) to see all tracking data');
+        console.log('📊 Metrics tracked: page visits, button clicks, time on page, scroll depth');
     </script>
 </body>
 </html>
